@@ -11,9 +11,9 @@ import {
 import Gallery from '../../utils/Gallery'
 
 let urls = [
-  'https://s3.amazonaws.com/bjj-image-content/roger-gracie.jpg',
-  'https://s3.amazonaws.com/bjj-image-content/adressa-cintra.png',
-  'https://s3.amazonaws.com/bjj-image-content/fellipe-andrew.png'
+  '../styles/images/roger-gracie.jpg',
+  '../styles/images/adressa-cintra.png',
+  '../styles/images/fellipe-andrew.png'
 ]
 
 const Home = props => (
