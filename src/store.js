@@ -7,7 +7,36 @@ import rootReducer from './modules'
 
 export const history = createHistory()
 
-const initialState = {}
+const initialState = {
+  heros: [{
+    id: '001',
+    firstname: 'Felipe',
+    lastname: 'Andrew',
+    nickname: '',
+    rank: 'black belt',
+    association: 'Zenith JJ Academy',
+    division: ' Medium weight'
+  },
+  {
+    id: '002',
+    firstname: 'Roger',
+    lastname: 'Gracie Gomes',
+    nickname: '',
+    rank: 'black belt',
+    association: 'Gracie-Barra',
+    division: 'Super Heavy Weight'
+  },
+  {
+    id: '003',
+    firstname: 'Andressa',
+    lastname: 'Mezari Cintra',
+    nickname: '',
+    rank: 'black belt',
+    association: 'Checkmat',
+    division: 'Medium weight'
+  }
+  ]
+}
 const enhancers = []
 const middleware = [
   thunk,
@@ -32,5 +61,6 @@ const store = createStore(
   initialState,
   composedEnhancers
 )
+console.log(store.getState())
 
 export default store

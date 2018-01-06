@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 class Gallery extends React.Component {
   renderImage(imageUrl, index){
   	return (
-      <div> 
-        <img key={index} alt={index} src={imageUrl} />
-      </div>
+      <li key={index}>
+       <img alt='' src={imageUrl} />   
+      </li>   
   	)
   }
 
@@ -14,7 +14,11 @@ class Gallery extends React.Component {
   	return (
       <div className="gallery">
         <div className="images">
-           {this.props.imageUrls.map((imgUrl,index) => this.renderImage(imgUrl, index))}
+          <ul> 
+            {this.props.imageUrls.map((imgUrl, index) => 
+            	 this.renderImage(imgUrl, index)
+            )}
+          </ul>
         </div> 
       </div>
   	)
