@@ -1,4 +1,7 @@
 import React from 'react'
+import { push } from 'react-router-redux'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { Route, Link } from 'react-router-dom'
 import { Layout } from '../../components/Layout'
 import { NotFoundPage } from '../notfound'
@@ -9,7 +12,7 @@ import Detail from '../hero'
 const renderHero = ({ match, staticContext }) => {
   const id = match.params.id;
   console.log("Render hero!!" + id)
-  return <Detail />;
+  return <Detail id={id}/>;
 };
 
 const App = () => (
@@ -22,9 +25,10 @@ const App = () => (
 	  <main>
 	    <Route exact path="/" component={Home} />
 	    <Route exact path="/about-us" component={About} />
-      <Route path="/hero" component={renderHero} />
-      
+      <Route path="/hero/:id" component={renderHero} />
     </main>   
   </Layout>
 )
+
+
 export default App;

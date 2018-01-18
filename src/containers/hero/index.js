@@ -1,18 +1,35 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-const Hero = props => (
-  <div>
-    <h1>Detail</h1>
-    <p>Hello Hero</p>
-  </div>
-)
+class Hero extends Component {
+  constructor(props) {
+  	super(props)
+  	
+  }
+  render(){
+	const { heros, id } = this.props
+	const hero = heros.find(current => current.id === id)
+		return (
+		  <div className="hero-full">
+		    <div className="hero">
+		      <h1>Detail for {id}</h1>
+		      { 
+		      	 
+		      }
+		      <div>
+                 <h1>{hero.name}</h1>
+		      </div>
+		    </div>
+		  </div>
+	  )
+	}	
+}
 
 function mapStateToProps(state, ownProps) {
   return {
-    id: ownProps.params,
+    heros: state.heros,
   };
 }
 const mapDispatchToProps = dispatch => bindActionCreators({
