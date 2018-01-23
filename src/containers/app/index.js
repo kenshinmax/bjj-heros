@@ -8,7 +8,12 @@ import { NotFoundPage } from '../notfound'
 import Home from '../home'
 import About from '../about'
 import Detail from '../hero'
- 
+
+import Amplify, { Analytics } from 'aws-amplify';
+import aws_exports from '../../aws-exports';
+
+Amplify.configure(aws_exports);
+
 const renderHero = ({ match, staticContext }) => {
   const id = match.params.id;
   console.log("Render hero!!" + id)

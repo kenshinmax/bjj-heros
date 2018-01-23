@@ -4,7 +4,7 @@ bower_components
 /dist
 src/js/libs
 src/css/libs
-
+/build
 hybrid/platforms
 hybrid/www/*
 
@@ -13,3 +13,7 @@ hybrid/plugins/*
 !hybrid/plugins/fetch.json
 
 nbproject/private
+
+#awsmobilejs
+awsmobilejs/.awsmobile/backend-build
+awsmobilejs/\#current-backend-info

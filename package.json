@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "aws-amplify": "^0.1.35",
+    "aws-amplify-react": "^0.1.30",
+    "es6-promise": "^4.2.2",
     "history": "^4.7.2",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
