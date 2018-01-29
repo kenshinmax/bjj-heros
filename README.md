@@ -5,6 +5,10 @@ Enjoy
 ## Installation
 npm start
 
+## Sample data
+This project contains a folder with sample data, which is located in the localData folder.  This file can be used as the initial state if you do not have an api available.
+
+
 ## Architecture
 
 Actions

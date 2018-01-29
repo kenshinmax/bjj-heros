@@ -16,7 +16,6 @@ Amplify.configure(aws_exports);
 
 const renderHero = ({ match, staticContext }) => {
   const id = match.params.id;
-  console.log("Render hero!!" + id)
   return <Detail id={id}/>;
 };
 

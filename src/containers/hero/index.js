@@ -9,6 +9,7 @@ class Hero extends Component {
   	super(props)
   }
   render(){
+  	
 	const { heros, id } = this.props.heroList
 	const hero = heros.find(current => current.id === id)
 	const headerStyle = { backgroundImage: `url(/styles/images/${hero.cover})` };
