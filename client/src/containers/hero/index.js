@@ -9,8 +9,9 @@ class Hero extends Component {
   	super(props)
   }
   render(){
-  	
-	const { heros, id } = this.props.heroList
+  	debugger
+	const { heros }  = this.props.heros
+	const id  = this.props.id
 	const hero = heros.find(current => current.id === id)
 	const headerStyle = { backgroundImage: `url(/styles/images/${hero.cover})` };
   return (
@@ -36,14 +37,8 @@ class Hero extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    heros: state.heros,
+    heros: state.heros.heroList,
   };
 }
-const mapDispatchToProps = dispatch => bindActionCreators({
- 
-}, dispatch)
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Hero)
+export default connect(mapStateToProps)(Hero)
