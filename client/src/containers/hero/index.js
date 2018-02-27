@@ -9,8 +9,8 @@ class Hero extends Component {
   	super(props)
   }
   render(){
-  	debugger
-	const { heros }  = this.props.heros
+  
+	const { heros }  = this.props.heroList
 	const id  = this.props.id
 	const hero = heros.find(current => current.id === id)
 	const headerStyle = { backgroundImage: `url(/styles/images/${hero.cover})` };
@@ -37,7 +37,7 @@ class Hero extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    heros: state.heros.heroList,
+    heroList: state.heros.heroList,
   };
 }
 
