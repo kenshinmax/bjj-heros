@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { createHero } from '../../actions'
 
-
-export const AddHero = ({ dispatch }) => {
+const CreateHero = ({ dispatch }) => {
 	let input
 
 	return (
@@ -20,3 +20,4 @@ export const AddHero = ({ dispatch }) => {
 	)
 }
 
+export default CreateHero;

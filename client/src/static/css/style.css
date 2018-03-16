@@ -249,3 +249,9 @@ nav.heros-menu a.active {
 #abar a:hover {
   text-decoration: underline;
 }
+
+.list-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
