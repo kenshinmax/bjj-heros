@@ -22,11 +22,11 @@ const renderHero = ({ match, staticContext }) => {
 
 const App = () => (
   <Layout>
-    <header>
+    <div className="main-app-nav">
      <Link to="/">Home</Link>
      <Link to="/about-us">About</Link>
      <Link to="/create">Create</Link>
-    </header>
+    </div>
 
 	  <main>
 	    <Route exact path="/" component={Home} />

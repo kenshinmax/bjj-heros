@@ -2,18 +2,17 @@ import { combineReducers } from 'redux'
 import {
   CREATE_HERO, CREATE_HERO_SUCCESS,
   CREATE_HERO_FAILURE, RESET_DELETED_HERO, FETCH_HEROS, FETCH_HEROS_SUCCESS,
-  FETCH_HEROS_FAILURE, RESET_HEROS
+  FETCH_HEROS_FAILURE, RESET_HEROS, DELETE_HERO, DELETE_HERO_SUCCESS, DELETE_HERO_FAILURE,
+  UPDATE_HERO, UPDATE_HERO_SUCCESS, UPDATE_HERO_FAILURE
 } from '../actions'
 
 const initialState = {
   heroList: { 
         heros: [],
         error: null,
-        loading: false
-  },
-  newHero:{ hero:null, error: null, loading: false}, 
-  activeHero:{ hero:null, error:null, loading: false}, 
-  deletedHero: { hero: null, error:null, loading: false},
+        loading: false,
+        submitting: false
+  }
 };
 
 
@@ -36,9 +35,25 @@ export default function (state = initialState, action) {
     case CREATE_HERO_FAILURE:
       error = action.payload || {message: action.payload.message};//2nd one is network or server down errors
       return {...state, newHero: {hero:null, error:error, loading: false}}
+
+    case UPDATE_HERO:
+      return {...state, updatedHero: {...state.newHero, loading: true}}
+    case UPDATE_HERO_SUCCESS:
+      return {...state, updatedHero: {hero: action.payload, error:null, loading: false}}
+    case UPDATE_HERO_FAILURE:
+      error = action.payload || {message: action.payload.message};//2nd one is network or server down errors
+      return {...state, updatedHero: {hero:null, error:error, loading: false}}
+
+    case DELETE_HERO:
+       return {...state, deletedHero: {...state.deletedHero, loading: true}}
+    case DELETE_HERO_SUCCESS:
+       return {...state, deletedHero: { hero:action.payload, error:null, loading: false}}
+    case DELETE_HERO_FAILURE:
+        error = action.payload || { message: action.payload.message};//2nd one is network or server down errors
+        return {...state, deletedHero: { hero:null, error:error, loading: false}}
     case RESET_DELETED_HERO:
-      return {...state, newHero:{hero:null, error:null, loading: false}}
-    
+        return {...state,  deletedHero:{ hero:null, error:null, loading: false}}
+
     case 'RESET':
       // By adding a `RESET` action, we can dispatch this to re-initialize our store.
       // You can dispatch this action on logout, or whenever you need to reset.

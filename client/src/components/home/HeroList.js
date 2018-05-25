@@ -12,9 +12,9 @@ class HeroList extends Component {
   renderHeros(heros) {
     return heros.map((hero) => {
       return (
-          <div className="home">
+          <div className="home" key={ hero.id }>
             <div className="heros-selector">
-                <HeroCard key={hero.id} {...hero} />
+                <HeroCard key={ hero.id } {...hero} />
             </div>
           </div>
       );
@@ -33,6 +33,7 @@ class HeroList extends Component {
     return (
       <div className="container">
         <h1>Heros</h1>
+      
         <ul className="list-group">
           {this.renderHeros(heros)}
         </ul>

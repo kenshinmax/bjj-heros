@@ -4,7 +4,7 @@ import HeroList from '../../components/home/HeroList';
 
 const mapStateToProps = (state) => {
   return {
-    heroList: state.heros.heroList
+    heroList: state.items.heroList
   }
 }
 

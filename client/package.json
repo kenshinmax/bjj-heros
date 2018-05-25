@@ -3,10 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "async": "^2.6.0",
     "aws-amplify": "^0.1.35",
     "aws-amplify-react": "^0.1.30",
+    "body-parser": "^1.18.3",
     "es6-promise": "^4.2.2",
     "history": "^4.7.2",
+    "mongoose": "^5.1.1",
+    "mongoose-timestamp": "^0.6.0",
+    "morgan": "^1.9.0",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -15,6 +20,9 @@
     "react-router-redux": "^5.0.0-alpha.9",
     "react-scripts": "1.0.17",
     "redux": "^3.7.2",
+    "redux-form": "^7.3.0",
+    "redux-logger": "^3.0.6",
+    "redux-promise": "^0.6.0",
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
@@ -23,6 +31,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:3001",
   "devDependencies": {
     "redux-devtools-dispatch": "^2.2.1"
   }

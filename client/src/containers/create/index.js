@@ -1,23 +1,21 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { createHero } from '../../actions'
+import { resetNewHero } from '../../actions'
+import HerosForm from '../../components/HerosForm'
 
-const CreateHero = ({ dispatch }) => {
-	let input
-
-	return (
-       <div>
-         <form>
-            <input ref={node => {
-            	input = node
-            }}
-            />
-            <button type="submit">
-              Add Hero 
-            </button>
-         </form>
-       </div>
-	)
+const mapDispatchToProps = (dispatch) => {
+ return {
+    resetMe: () => {
+      dispatch(resetNewHero())
+    }
+  }
 }
 
-export default CreateHero;
+
+function mapStateToProps (state, ownProps) {
+  return {
+    newHero: state.items.newHero
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(HerosForm)
+

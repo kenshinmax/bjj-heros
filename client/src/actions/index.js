@@ -11,27 +11,72 @@ export const FETCH_HERO_FAILURE = 'FETCH_HERO_FAILURE';
 export const RESET_ACTIVE_HERO = 'RESET_ACTIVE_HERO';
 export const RESET_DELETED_HERO = 'RESET_DELETED_HERO'
 
+//Validate post fields like Title, Categries on the server
+export const VALIDATE_HERO_FIELDS = 'VALIDATE_HERO_FIELDS';
+export const VALIDATE_HERO_FIELDS_SUCCESS = 'VALIDATE_HERO_FIELDS_SUCCESS';
+export const VALIDATE_HERO_FIELDS_FAILURE = 'VALIDATE_HERO_FIELDS_FAILURE';
+export const RESET_HERO_FIELDS = 'RESET_HERO_FIELDS';
+
 // Create Hero
 export const CREATE_HERO = 'CREATE_HERO'
 export const CREATE_HERO_SUCCESS = 'CREATE_HERO_SUCCESS'
 export const CREATE_HERO_FAILURE = 'CREATE_HERO_FAILURE'
 export const RESET_NEW_HERO = 'RESET_NEW_HERO' 
 
-const url = 'http://5a3a8e1ede64a0001262774a.mockapi.io/api/v1'
+// Update Hero
+export const UPDATE_HERO = 'UPDATE_HERO'
+export const UPDATE_HERO_SUCCESS = 'UPDATE_HERO_SUCCESS'
+export const UPDATE_HERO_FAILURE = 'UPDATE_HERO_FAILURE'
 
-export function createHero(props, tokenFromStorage) {
-  const request = fetch(url + '/items/',{
-    method: 'post',
-    body: JSON.stringify(props)
-  }).then(function(response) {
-    return response.json()
-  }).then(function (data) {
-    console.log('got data', data)
-  })
+// Delete Hero
+export const DELETE_HERO = 'DELETE_HERO'
+export const DELETE_HERO_SUCCESS = 'DELETE_HERO_SUCCESS'
+export const DELETE_HERO_FAILURE = 'DELETE_HERO_FAILURE'
+
+
+//const url = 'http://5a3a8e1ede64a0001262774a.mockapi.io/api/v1'
+const url = 'http://localhost:3001'
+
+
+
+
+export function validateHeroFields(props) {
+
+  const request = fetch(url + '/items/validate/fields', { 
+      method: 'post', 
+      body: JSON.stringify(props)
+    })
 
   return {
-    type: CREATE_HERO,
+    type: VALIDATE_HERO_FIELDS,
     payload: request
+  }
+}
+
+export function validateHeroFieldsSuccess() {
+  return {
+    type: VALIDATE_HERO_FIELDS_SUCCESS
+  };
+}
+
+export function validateHeroFieldsFailure(error) {
+  return {
+    type: VALIDATE_HERO_FIELDS_FAILURE,
+    payload: error
+  };
+}
+
+export function updateHeroSuccess(newHero) {
+  return {
+    type: UPDATE_HERO_SUCCESS,
+    payload: newHero
+  };
+}
+
+export function updateHeroFailure(error) {
+  return {
+    type: UPDATE_HERO_FAILURE,
+    payload: error
   };
 }
 
@@ -48,6 +93,42 @@ export function createHeroFailure(error) {
     payload: error
   };
 }
+
+export function setHero(request) {
+  return {
+    type: UPDATE_HERO,
+    payload: request
+  }
+}
+
+export function addHero(request) {
+  return {
+      type: CREATE_HERO,
+      payload: request
+    }
+}
+
+export function deleteHeroSuccess(removedHero) {
+  return {
+    type: DELETE_HERO_SUCCESS,
+    deletedHero: removedHero
+  };
+}
+
+export function deletedHeroFailure(error) {
+  return {
+    type: DELETE_HERO_FAILURE,
+    payload: error
+  };
+}
+
+export function deleteHero(request) {
+  return {
+      type: DELETE_HERO,
+      payload: request
+    }
+}
+
 
 export function resetNewHero() {
   return {
@@ -70,12 +151,44 @@ function requestHero(request) {
   }
 }
 
-function fetchHero(id) {
+export function updateHero(props){
+  return dispatch => { 
+    dispatch(setHero())
+    return  fetch(url + '/items/updateHero', { 
+      method: "POST",
+      headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+      }, 
+      body: JSON.stringify(props)
+    })
+    .then(response => response.json())
+    .then(json => dispatch(updateHeroSuccess(json)))
+  }
+}
+
+export function createHero(props) {
+  return dispatch => {
+    dispatch(addHero())
+    return fetch(url + '/items/addHero', { 
+            method: "POST",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            }, 
+            body: JSON.stringify(props)
+       })
+      .then(response => response.json())
+      .then(json => dispatch(createHeroSuccess(json)))
+  }
+}
+
+export function fetchHero(id) {
    return dispatch => {
    	  dispatch(requestHero())
    	  return fetch(url + '/items/'+id)
    	       .then(response => response.json())
-   	       .then(json => dispatch(fetchHeroSuccess))
+   	       .then(json => dispatch(fetchHeroSuccess()))
    }
 
 }
