@@ -67,6 +67,7 @@ class HerosEditForm extends Component {
 	    //Important! If your component is navigating based on some global state(from say componentWillReceiveProps)
 	    //always reset that global state back to null when you REMOUNT
 	    //this.props.resetMe();
+      this.props.fetchHero();
 	 }
 
 	componentWillReceiveProps(nextProps) {
@@ -88,11 +89,11 @@ class HerosEditForm extends Component {
      }
 	}
 	render() {
-		const {handleSubmit, pristine, reset, submitting, hero, onClick} = this.props;
-
+		const {handleSubmit, pristine, reset, submitting, activeHero, onClick} = this.props;
+   
 		return (
 			<div className='container'>
-			 { this.renderError(hero) }
+			 { this.renderError(activeHero) }
 	         <form className="add-hero-form" onSubmit={ handleSubmit(validateAndCreatePost) }>
 	             <Field
                    name="firstname"
@@ -140,12 +141,17 @@ class HerosEditForm extends Component {
 	}
 }
 
-export default reduxForm({
-	form: 'HerosEditForm',
-  initialValues: {
-    firstname: this.props
-  },
-	validate,
-  enableReinitialize : true
-	//asyncValidate
- })(HerosEditForm)
+function mapStateToProps(state, ownProps) {
+    
+    return {
+        initialValues : ownProps.activeHero.hero
+     }
+}
+
+export default connect( mapStateToProps )(
+    reduxForm({
+	    form: 'HerosEditForm',
+     	validate,
+      enableReinitialize : true
+    })(HerosEditForm)
+  );

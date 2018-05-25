@@ -188,7 +188,7 @@ export function fetchHero(id) {
    	  dispatch(requestHero())
    	  return fetch(url + '/items/'+id)
    	       .then(response => response.json())
-   	       .then(json => dispatch(fetchHeroSuccess()))
+   	       .then(json => dispatch(fetchHeroSuccess(json)))
    }
 
 }

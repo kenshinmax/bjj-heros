@@ -4,15 +4,16 @@ import { fetchHero } from '../../actions'
 import HeroEditForm from '../../components/HeroEditForm'
 
 function mapStateToProps (state, ownProps) {
+  
   return {
-    //activeHero: state.heros.activeHero
+    activeHero: ownProps
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
  return {
     fetchHero: () => {
-    	dispatch(fetchHero(this.props.hero.id))
+    	dispatch(fetchHero(ownProps.hero.id))
     }
   }
 }
