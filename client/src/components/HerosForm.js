@@ -44,22 +44,16 @@ const asyncValidate = (values, dispatch) => {
 }
 
 const validateAndCreatePost = (values, dispatch) => {
-	
 	return dispatch(createHero(values))
 	  .then(result => {
            if(result.payload.response && result.payload.status!=200){
            	  dispatch(createHeroFailure(result.payload.response.data))
-              //reject(result.payload.response.data); //this is for redux-form itself
-           	  //throw new SubmissionError(result.payload.response.data)
            }
            // let other components know all is ok
-           debugger
            dispatch(createHeroSuccess(result.payload.data))
            dispatch(push('/'))
-           //resolve();//this is for redux-form itself
 	    } 
 	  )
-	  
 }
 
 class HerosForm extends Component {
@@ -115,10 +109,10 @@ class HerosForm extends Component {
                    component={ renderField }
                    label="Rank" />
 	            <Field
-                   name="affiliation"
+                   name="association"
                    type="text"
                    component={ renderField }
-                   label="Affiliation" />
+                   label="Association" />
 	            <Field
                    name="division"
                    type="text"

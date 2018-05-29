@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { validateHeroFields, validateHeroFieldsSuccess, validateHeroFieldsFailure } from '../actions'
-import { createHero, createHeroSuccess, createHeroFailure } from '../actions'
+import { updateHero, updateHeroSuccess, updateHeroFailure } from '../actions'
 import renderField  from './renderField'
 import { Link } from 'react-router-dom'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
+import HerosMenu  from './HerosMenu'
 
 //Client side validation
 function validate(values) {
@@ -44,17 +45,17 @@ const asyncValidate = (values, dispatch) => {
     });
 }
 
-const validateAndCreatePost = (values, dispatch) => {
-	console.log('Validate and create post', values)
-	return dispatch(createHero(values))
+const validateAndUpdatePost = (values, dispatch) => {
+	console.log('Validate and update post', values)
+	return dispatch(updateHero(values))
 	  .then(result => {
            if(result.payload.response && result.payload.status!=200){
-           	  dispatch(createHeroFailure(result.payload.response.data))
+           	  dispatch(updateHeroFailure(result.payload.response.data))
               //reject(result.payload.response.data); //this is for redux-form itself
            	  //throw new SubmissionError(result.payload.response.data)
            }
            // let other components know all is ok
-           dispatch(createHeroSuccess(result.payload.data))
+           dispatch(updateHeroSuccess(result.payload.data))
            dispatch(push('/'))
            //resolve();//this is for redux-form itself
 	    } 
@@ -63,6 +64,36 @@ const validateAndCreatePost = (values, dispatch) => {
 }
 
 class HerosEditForm extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {isEditing: false};
+    this.toggleEdit = this.toggleEdit.bind(this);
+  }
+  toggleEdit() {
+    this.setState({isEditing: !this.state.isEditing})
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.id != nextProps.id) {
+      console.log("old hero", this.state.hero)
+      this.setState({hero: nextProps.hero});
+      console.log("hero has updated", this.state.hero)
+    }
+  }
+
+  updateHeroState(event) {
+    const field = event.target.name;
+    const hero = this.state.hero;
+    hero[field] = event.target.value;
+    return this.setState({hero: hero});
+  }
+  removeHero (event) {
+    
+    console.log("Remove")
+   //event.preventDefault();
+   //this.state.actions.deleteHero(this.state.hero.id)
+  }
 	componentWillMount() {
 	    //Important! If your component is navigating based on some global state(from say componentWillReceiveProps)
 	    //always reset that global state back to null when you REMOUNT
@@ -89,12 +120,18 @@ class HerosEditForm extends Component {
      }
 	}
 	render() {
-		const {handleSubmit, pristine, reset, submitting, activeHero, onClick} = this.props;
    
-		return (
+	 const {handleSubmit, pristine, reset, submitting, activeHero, onClick} = this.props;
+   const id  = this.props.id
+   const heros   = this.props.heroList
+   const hero = heros.find(current => current.id === id)
+   const headerStyle = { backgroundImage: `url(/styles/images/${hero.cover})` };
+  
+    if (this.state.isEditing) {
+		 return (
 			<div className='container'>
 			 { this.renderError(activeHero) }
-	         <form className="add-hero-form" onSubmit={ handleSubmit(validateAndCreatePost) }>
+	         <form className="add-hero-form" onSubmit={ handleSubmit(validateAndUpdatePost) }>
 	             <Field
                    name="firstname"
                    type="text"
@@ -116,10 +153,10 @@ class HerosEditForm extends Component {
                    component={ renderField }
                    label="Rank" />
 	            <Field
-                   name="affiliation"
+                   name="association"
                    type="text"
                    component={ renderField }
-                   label="Affiliation" />
+                   label="Association" />
 	            <Field
                    name="division"
                    type="text"
@@ -137,14 +174,42 @@ class HerosEditForm extends Component {
               </div>
 	         </form>
 	       </div>
-		)
+		 )
+    }
+    return (
+    
+      <div className="hero-full">
+      <HerosMenu heros={heros} />
+        <div className="hero">
+          <header style={headerStyle} />
+          <div className="picture-container">
+             <img alt={`${hero.firstname}'s profile`} src={`/styles/images/${hero.image}`} />
+             <h2 className="name">{hero.firstname + ' ' + hero.lastname}</h2>
+          </div>
+          <section className="description">
+                <p>First: {hero.firstname}</p>
+                <p>Last: {hero.lastname}</p>
+                <p>nickname: {hero.nickname}</p>
+                <p>Rank: {hero.rank}</p>
+                <p>Association: {hero.association}</p>
+                <p>Division: {hero.division}</p>
+          </section>
+          <button onClick={this.toggleEdit}>Edit</button>
+          <button onClick={this.props.deleteHero}>Delete</button>
+        </div>
+        <div className="navigateBack">
+            <Link to="/">« Back to the index</Link>
+          </div>
+      </div>
+    )
+
 	}
 }
 
 function mapStateToProps(state, ownProps) {
     
     return {
-        initialValues : ownProps.activeHero.hero
+        initialValues : state.items.heroList.heros.find(current => current.id === ownProps.id)
      }
 }
 

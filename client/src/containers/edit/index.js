@@ -1,19 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchHero } from '../../actions'
+import { fetchHero, deleteHero } from '../../actions'
 import HeroEditForm from '../../components/HeroEditForm'
 
 function mapStateToProps (state, ownProps) {
-  
   return {
-    activeHero: ownProps
+    heroList: ownProps.heroList,
+    id: ownProps.id
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
  return {
+    deleteHero: () => 
+    	dispatch(deleteHero(ownProps))
+    , 
     fetchHero: () => {
-    	dispatch(fetchHero(ownProps.hero.id))
+    	dispatch(fetchHero(ownProps.id))
     }
   }
 }

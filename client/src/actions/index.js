@@ -115,14 +115,14 @@ export function deleteHeroSuccess(removedHero) {
   };
 }
 
-export function deletedHeroFailure(error) {
+export function deleteHeroFailure(error) {
   return {
     type: DELETE_HERO_FAILURE,
     payload: error
   };
 }
 
-export function deleteHero(request) {
+export function removeHero(request) {
   return {
       type: DELETE_HERO,
       payload: request
@@ -151,10 +151,26 @@ function requestHero(request) {
   }
 }
 
+export function deleteHero(props) {
+  
+  return dispatch => {
+    dispatch(removeHero())
+    return fetch(url + '/items/removeHero/' + props.id, {
+      method: "DELETE",
+      headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+      }
+    })
+    .then(response => response.json())
+    .then(json => dispatch(deleteHeroSuccess(json)))
+  }
+}
 export function updateHero(props){
+  
   return dispatch => { 
     dispatch(setHero())
-    return  fetch(url + '/items/updateHero', { 
+    return  fetch(url + '/items/updateHero/' + props.id, { 
       method: "POST",
       headers: {
               'Accept': 'application/json',

@@ -67,6 +67,25 @@ router.get('/:id', function(req, res, next) {
 
 });
 
+router.delete('/removeHero/:id', function(req, res, next) {
+   var heroId = req.params.id;
+   Hero.findOneAndRemove({id: heroId} , function(err, post) {
+    if (err)
+      throw err;
+
+    if (!post) {
+      return res.status(404).json({
+        message: 'Could not delete hero'
+      });
+    }
+
+    res.json({
+      result: 'Hero was deleted'
+    });
+
+  });
+})
+
 /* GET items listing. */
 router.get('/', function(req, res, next) {
 	Hero
@@ -119,8 +138,8 @@ router.post('/addHero', function(req, res, next) {
   
 });
 
-router.post('/updateHero', function(req, res, next) {
-   var fullname = req.body.firstname.toLowerCase() + "-" + req.body.lastname.toLowerCase()
+router.post('/updateHero/:id', function(req, res, next) {
+   var fullname = req.params.id
    //console.log("updating.." + fullname)
    isHeroUnique(fullname, function(err) {
       Hero.findOneAndUpdate({

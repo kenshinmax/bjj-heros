@@ -28,9 +28,7 @@ a {
   font-size: 1.2em;
 }
 header {
-  /*padding: 2em;*/
-  margin-bottom: -20px;
-  margin-top: -20px;
+  padding: 2em;
 }
 
 header .logo {
