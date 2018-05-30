@@ -45,6 +45,18 @@ function isHeroUnique(fullname, cb) {
   });
 }
 
+router.get('/offer/:rank', function(req, res, next) {
+  if(req.params.rank == 'black') {
+    res.json({
+      currentOffer: 'Premium status'
+    });
+  } else {
+     res.json({
+      currentOffer: 'Standard status'
+    });
+  }
+})
+
 /* GET items listing. */
 router.get('/:id', function(req, res, next) {
   

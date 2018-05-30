@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import HerosMenu  from './HerosMenu'
+import CurrentOffers from './CurrentOffers'
 
 //Client side validation
 function validate(values) {
@@ -189,7 +190,9 @@ class HerosEditForm extends Component {
                 <p>Rank: {hero.rank}</p>
                 <p>Association: {hero.association}</p>
                 <p>Division: {hero.division}</p>
+                 <CurrentOffers offer={{ "message": "Premium status"}} />
           </section>
+         
           <button onClick={this.toggleEdit}>Edit</button>
           <button onClick={deleteHero}>Delete</button>
         </div>

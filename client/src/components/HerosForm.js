@@ -5,6 +5,7 @@ import { createHero, createHeroSuccess, createHeroFailure } from '../actions'
 import renderField  from './renderField'
 import { Link } from 'react-router-dom'
 import { push } from 'react-router-redux'
+import Notifications, {notify} from 'react-notify-toast'
 
 //Client side validation
 function validate(values) {
@@ -81,9 +82,12 @@ class HerosForm extends Component {
      	return <span></span>
      }
 	}
+  
+
+
 	render() {
 		const {handleSubmit, pristine, reset, submitting, newHero} = this.props;
-
+    let myColor = { background: '#0E1717', text: "#FFFFFF" }
 		return (
 			<div className='container'>
 			 { this.renderError(newHero) }
@@ -121,6 +125,7 @@ class HerosForm extends Component {
 	           <div className="button-container">
                <button
                     type="submit"
+                    onClick={ () => notify.show("Added new hero...", "custom", 3000, myColor)}
                     className="btn btn-primary"
                     disabled={pristine || submitting}>
                    Submit

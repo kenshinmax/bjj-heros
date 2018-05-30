@@ -33,6 +33,11 @@ export const DELETE_HERO = 'DELETE_HERO'
 export const DELETE_HERO_SUCCESS = 'DELETE_HERO_SUCCESS'
 export const DELETE_HERO_FAILURE = 'DELETE_HERO_FAILURE'
 
+// Current offers
+export const FETCH_OFFER = 'FETCH_OFFER';
+export const FETCH_OFFER_SUCCESS = 'FETCH_OFFER_SUCCESS';
+export const FETCH_OFFER_FAILURE = 'FETCH_OFFER_FAILURE';
+
 
 //const url = 'http://5a3a8e1ede64a0001262774a.mockapi.io/api/v1'
 const url = 'http://localhost:3001'
@@ -62,6 +67,21 @@ export function validateHeroFieldsSuccess() {
 export function validateHeroFieldsFailure(error) {
   return {
     type: VALIDATE_HERO_FIELDS_FAILURE,
+    payload: error
+  };
+}
+
+
+export function fetchOfferSuccess(newOffer) {
+  return {
+    type: FETCH_OFFER_SUCCESS,
+    payload: newOffer
+  };
+}
+
+export function fetchOfferFailure(error) {
+  return {
+    type: FETCH_OFFER_FAILURE,
     payload: error
   };
 }
@@ -104,6 +124,13 @@ export function setHero(request) {
 export function addHero(request) {
   return {
       type: CREATE_HERO,
+      payload: request
+    }
+}
+
+export function fetchOffer(request) {
+  return {
+      type: FETCH_OFFER,
       payload: request
     }
 }
@@ -152,10 +179,8 @@ function requestHero(request) {
 }
 
 export function deleteHero(props) {
-
   return dispatch => {
     dispatch(removeHero())
-    debugger
     return fetch(url + '/items/removeHero/' + props, {
       method: "DELETE",
       headers: {

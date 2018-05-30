@@ -4,7 +4,7 @@ import {
   CREATE_HERO_FAILURE, RESET_DELETED_HERO, FETCH_HEROS, FETCH_HEROS_SUCCESS,
   FETCH_HEROS_FAILURE, RESET_HEROS, DELETE_HERO, DELETE_HERO_SUCCESS, DELETE_HERO_FAILURE,
   UPDATE_HERO, UPDATE_HERO_SUCCESS, UPDATE_HERO_FAILURE, FETCH_HERO, FETCH_HERO_SUCCESS,
-  FETCH_HERO_FAILURE
+  FETCH_HERO_FAILURE, FETCH_OFFER, FETCH_OFFER_FAILURE, FETCH_OFFER_SUCCESS
 } from '../actions'
 
 const initialState = {
@@ -61,6 +61,15 @@ export default function (state = initialState, action) {
         return {...state, deletedHero: { hero:null, error:error, loading: false}}
     case RESET_DELETED_HERO:
         return {...state,  deletedHero:{ hero:null, error:null, loading: false}}
+
+    case FETCH_OFFER:
+      return {...state, offer: {...state.offer, loading: true}}
+    case FETCH_OFFER_SUCCESS:
+      return {...state, offer: {hero:action.payload, error:null, loading: false}}
+    case FETCH_OFFER_FAILURE:
+      error = action.payload || {message: action.payload.message};//2nd one is network or server down errors
+      return {...state, offer: {offer:null, error:error, loading: false}}
+          
 
     case 'RESET':
       // By adding a `RESET` action, we can dispatch this to re-initialize our store.

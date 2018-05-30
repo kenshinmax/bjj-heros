@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-
 import { HeroCard } from '../../components/home/HeroCard'
 
 class HeroList extends Component {
@@ -33,7 +32,6 @@ class HeroList extends Component {
     return (
       <div className="container">
         <h1>Heros</h1>
-      
         <ul className="list-group">
           {this.renderHeros(heros)}
         </ul>
