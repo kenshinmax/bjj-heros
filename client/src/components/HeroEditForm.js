@@ -60,8 +60,8 @@ const validateAndUpdatePost = (values, dispatch) => {
            //resolve();//this is for redux-form itself
 	    } 
 	  )
-	  
 }
+
 
 class HerosEditForm extends Component {
 
@@ -88,12 +88,7 @@ class HerosEditForm extends Component {
     hero[field] = event.target.value;
     return this.setState({hero: hero});
   }
-  removeHero (event) {
-    
-    console.log("Remove")
-   //event.preventDefault();
-   //this.state.actions.deleteHero(this.state.hero.id)
-  }
+
 	componentWillMount() {
 	    //Important! If your component is navigating based on some global state(from say componentWillReceiveProps)
 	    //always reset that global state back to null when you REMOUNT
@@ -121,12 +116,13 @@ class HerosEditForm extends Component {
 	}
 	render() {
    
-	 const {handleSubmit, pristine, reset, submitting, activeHero, onClick} = this.props;
+	 const {deleteHero, handleSubmit, pristine, reset, submitting, activeHero, onClick} = this.props;
    const id  = this.props.id
    const heros   = this.props.heroList
    const hero = heros.find(current => current.id === id)
    const headerStyle = { backgroundImage: `url(/styles/images/${hero.cover})` };
-  
+   
+
     if (this.state.isEditing) {
 		 return (
 			<div className='container'>
@@ -189,13 +185,13 @@ class HerosEditForm extends Component {
           <section className="description">
                 <p>First: {hero.firstname}</p>
                 <p>Last: {hero.lastname}</p>
-                <p>nickname: {hero.nickname}</p>
+                <p>Nickname: {hero.nickname}</p>
                 <p>Rank: {hero.rank}</p>
                 <p>Association: {hero.association}</p>
                 <p>Division: {hero.division}</p>
           </section>
           <button onClick={this.toggleEdit}>Edit</button>
-          <button onClick={this.props.deleteHero}>Delete</button>
+          <button onClick={deleteHero}>Delete</button>
         </div>
         <div className="navigateBack">
             <Link to="/">« Back to the index</Link>
@@ -212,6 +208,7 @@ function mapStateToProps(state, ownProps) {
         initialValues : state.items.heroList.heros.find(current => current.id === ownProps.id)
      }
 }
+
 
 export default connect( mapStateToProps )(
     reduxForm({

@@ -12,9 +12,6 @@ function mapStateToProps (state, ownProps) {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
  return {
-    deleteHero: () => 
-    	dispatch(deleteHero(ownProps))
-    , 
     fetchHero: () => {
     	dispatch(fetchHero(ownProps.id))
     }

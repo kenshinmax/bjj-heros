@@ -152,10 +152,11 @@ function requestHero(request) {
 }
 
 export function deleteHero(props) {
-  
+
   return dispatch => {
     dispatch(removeHero())
-    return fetch(url + '/items/removeHero/' + props.id, {
+    debugger
+    return fetch(url + '/items/removeHero/' + props, {
       method: "DELETE",
       headers: {
               'Accept': 'application/json',

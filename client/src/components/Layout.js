@@ -13,8 +13,7 @@ export const Layout = props => {
       <div className="app-content">{props.children}</div>
       <footer>
         <p>
-          This is a demo app to showcase <strong>universal Javascript</strong>
-          with <strong> React</strong> and <strong> React-router</strong>.
+          This is an app to showcase athletes who practice <strong>Brazilian Jiu Jitsu</strong>.
         </p>
       </footer>
     </div>
