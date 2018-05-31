@@ -178,6 +178,20 @@ function requestHero(request) {
   }
 }
 
+export function currentOffers(props) {
+  return dispatch => {
+    dispatch(fetchOffer())
+    return fetch(url + '/items/offer/' + props, {
+      method: "GET",
+      headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+      }
+    })
+    .then(response => response.json())
+    .then(json => dispatch(fetchOfferSuccess(json)))
+  }
+}
 export function deleteHero(props) {
   return dispatch => {
     dispatch(removeHero())

@@ -83,18 +83,13 @@ class HerosEditForm extends Component {
     }
   }
 
-  updateHeroState(event) {
-    const field = event.target.name;
-    const hero = this.state.hero;
-    hero[field] = event.target.value;
-    return this.setState({hero: hero});
-  }
-
 	componentWillMount() {
 	    //Important! If your component is navigating based on some global state(from say componentWillReceiveProps)
 	    //always reset that global state back to null when you REMOUNT
 	    //this.props.resetMe();
+      this.props.currentOffers();
       this.props.fetchHero();
+      
 	 }
 
 	componentWillReceiveProps(nextProps) {
@@ -120,6 +115,7 @@ class HerosEditForm extends Component {
 	 const {deleteHero, handleSubmit, pristine, reset, submitting, activeHero, onClick} = this.props;
    const id  = this.props.id
    const heros   = this.props.heroList
+   const offer = this.props.offer
    const hero = heros.find(current => current.id === id)
    const headerStyle = { backgroundImage: `url(/styles/images/${hero.cover})` };
    
@@ -190,7 +186,7 @@ class HerosEditForm extends Component {
                 <p>Rank: {hero.rank}</p>
                 <p>Association: {hero.association}</p>
                 <p>Division: {hero.division}</p>
-                 <CurrentOffers offer={{ "message": "Premium status"}} />
+                 <CurrentOffers offer={offer} />
           </section>
          
           <button onClick={this.toggleEdit}>Edit</button>
@@ -208,7 +204,8 @@ class HerosEditForm extends Component {
 function mapStateToProps(state, ownProps) {
     
     return {
-        initialValues : state.items.heroList.heros.find(current => current.id === ownProps.id)
+        initialValues : state.items.heroList.heros.find(current => current.id === ownProps.id),
+        offer: state.items.offer
      }
 }
 

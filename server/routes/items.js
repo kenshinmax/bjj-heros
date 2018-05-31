@@ -46,7 +46,7 @@ function isHeroUnique(fullname, cb) {
 }
 
 router.get('/offer/:rank', function(req, res, next) {
-  if(req.params.rank == 'black') {
+  if(req.params.rank == 'Black') {
     res.json({
       currentOffer: 'Premium status'
     });
