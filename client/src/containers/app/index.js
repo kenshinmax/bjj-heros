@@ -12,6 +12,7 @@ import CreateHero from '../create'
 
 import Amplify, { Analytics } from 'aws-amplify';
 import aws_exports from '../../aws-exports';
+import { withAuthenticator } from 'aws-amplify-react';
 
 Amplify.configure(aws_exports);
 
@@ -21,6 +22,7 @@ const renderHero = ({ match, staticContext }) => {
 };
 
 const App = () => (
+
   <Layout>
     <div className="main-app-nav">
      <Link to="/">Home</Link>
@@ -38,4 +40,4 @@ const App = () => (
 )
 
 
-export default App;
+export default withAuthenticator(App, true);

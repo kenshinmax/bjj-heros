@@ -1,0 +1,85 @@
+--- !com.amazonaws.mobilehub.v0.Project 
+apps:
+  web: !com.amazonaws.mobilehub.v0.AppDO {}
+features:
+  content-delivery: !com.amazonaws.mobilehub.v0.ContentDelivery 
+    attributes:
+      enabled: true
+      visibility: public-global
+    components:
+      release: !com.amazonaws.mobilehub.v0.Bucket {}
+  database: !com.amazonaws.mobilehub.v0.Database 
+    components:
+      database-nosql: !com.amazonaws.mobilehub.v0.NoSQLDatabase 
+        tables:
+          - !com.amazonaws.mobilehub.v0.NoSQLTable 
+            attributes:
+              association: S
+              created: S
+              createdBy: S
+              division: S
+              firstname: S
+              joined: S
+              lastname: S
+              nickname: S
+              rank: S
+              updated: S
+              updatedBy: S
+              userId: S
+            hashKeyName: userId
+            hashKeyType: S
+            indexes:
+              - !com.amazonaws.mobilehub.v0.NoSQLIndex 
+                hashKeyName: userId
+                hashKeyType: S
+                indexName: userId
+                rangeKeyName: ''
+                rangeKeyType: ''
+            rangeKeyName: ''
+            rangeKeyType: ''
+            tableName: ___DYNAMIC_PREFIX___-heros
+            tablePrivacy: protected
+  mobile-analytics: !com.amazonaws.mobilehub.v0.Pinpoint 
+    components:
+      analytics: !com.amazonaws.mobilehub.v0.PinpointAnalytics {}
+  sign-in: !com.amazonaws.mobilehub.v0.SignIn 
+    attributes:
+      enabled: true
+      optional-sign-in: true
+    components:
+      sign-in-user-pools: !com.amazonaws.mobilehub.v0.UserPoolsIdentityProvider 
+        attributes:
+          alias-attributes:
+            - email
+          mfa-configuration: OFF
+          name: userpool
+          password-policy: !com.amazonaws.mobilehub.ConvertibleMap 
+            min-length: '8'
+            require-lower-case: true
+            require-numbers: true
+            require-symbols: true
+            require-upper-case: true
+          standard-attributes: '[]'
+  cloudlogic: !com.amazonaws.mobilehub.v0.CloudLogic 
+    components:
+      herosCRUD: !com.amazonaws.mobilehub.v0.API 
+        attributes:
+          name: herosCRUD
+          requires-signin: true
+        paths:
+          /heros: !com.amazonaws.mobilehub.v0.Function 
+            name: heros
+            codeFilename: uploads/heros-20180606222650.zip
+            handler: lambda.handler
+            enableCORS: true
+            runtime: nodejs6.10
+            environment: {}
+          '/heros/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
+            name: heros
+            codeFilename: uploads/heros-20180606222650.zip
+            handler: lambda.handler
+            enableCORS: true
+            runtime: nodejs6.10
+            environment: {}
+name: aforce-usa
+region: us-east-1

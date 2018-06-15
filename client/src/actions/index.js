@@ -38,12 +38,12 @@ export const FETCH_OFFER = 'FETCH_OFFER';
 export const FETCH_OFFER_SUCCESS = 'FETCH_OFFER_SUCCESS';
 export const FETCH_OFFER_FAILURE = 'FETCH_OFFER_FAILURE';
 
+import Amplify, { API } from 'aws-amplify';
+import aws_exports from './aws-exports';
 
-//const url = 'http://5a3a8e1ede64a0001262774a.mockapi.io/api/v1'
+Amplify.configure(aws_exports);
+
 const url = 'http://localhost:3001'
-
-
-
 
 export function validateHeroFields(props) {
 
@@ -192,6 +192,16 @@ export function currentOffers(props) {
     .then(json => dispatch(fetchOfferSuccess(json)))
   }
 }
+
+export function fetchHeros() {
+  return dispatch => {
+    dispatch(requestHeros())
+    return fetch(url+'/items')
+          .then(response => response.json())
+          .then(json => dispatch(fetchHerosSuccess(json)))  
+  }
+}
+
 export function deleteHero(props) {
   return dispatch => {
     dispatch(removeHero())
@@ -207,7 +217,6 @@ export function deleteHero(props) {
   }
 }
 export function updateHero(props){
-  
   return dispatch => { 
     dispatch(setHero())
     return  fetch(url + '/items/updateHero/' + props.id, { 
@@ -265,16 +274,6 @@ export function fetchHeroFailure(error) {
 export function resetActiveHero() {
   return {
     type: RESET_ACTIVE_HERO
-  }
-}
-
-
-export function fetchHeros() {
-	return dispatch => {
-	  dispatch(requestHeros())
-	  return fetch(url+'/items')
-          .then(response => response.json())
-          .then(json => dispatch(fetchHerosSuccess(json)))  
   }
 }
 

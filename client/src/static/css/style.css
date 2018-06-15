@@ -1,4 +1,4 @@
-/*! CSS reset from benfrain/app-reset */
+/*! CSS reset from benfrain/app-reset 
 *,:after,:before{box-sizing:inherit}html{box-sizing:border-box}
 *{user-select:none;-webkit-tap-highlight-color:rgba(255,255,255,0);-webkit-tap-highlight-color:transparent}
 [contenteditable],
@@ -93,19 +93,19 @@ footer p {
   width: 100%;
 }
 
-.home .heros-selector .heros-preview:hover {
+.home .heros-selector .hero-preview:hover {
   transform: scale(1.1);
 }
 
-.home .heros-selector .heros-preview img {
+.home .heros-selector .hero-preview img {
   margin: 0;
   width: 100%;
 }
 
-.home .heros-selector .heros-preview .name {
+.home .heros-selector .hero-preview .name {
   color: #030303;
   display: inline-block;
-  font-size: 1.6em;
+  font-size: 1.2em;
   overflow: hidden;
   padding: .2em;
   text-align: center;
@@ -115,7 +115,7 @@ footer p {
   width: 100%;
 }
 
-.home .heros-selector .heros-preview .medals-count {
+.home .heros-selector .hero-preview .medals-count {
   background: #fff;
   border-radius: 2px;
   display: inline-block;
@@ -283,3 +283,4 @@ nav.heros-menu a.active {
   flex-direction: column;
   justify-content: center;
 }
+*/

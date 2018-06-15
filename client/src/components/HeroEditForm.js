@@ -8,6 +8,8 @@ import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import HerosMenu  from './HerosMenu'
 import CurrentOffers from './CurrentOffers'
+import DatePicker from 'react-date-picker'
+
 
 //Client side validation
 function validate(values) {
@@ -68,9 +70,15 @@ class HerosEditForm extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {isEditing: false};
+    this.state = {
+      isEditing: false,
+      date: new Date(),
+    };
     this.toggleEdit = this.toggleEdit.bind(this);
   }
+  
+  onChange = date => this.setState({ date })
+
   toggleEdit() {
     this.setState({isEditing: !this.state.isEditing})
   }
@@ -87,7 +95,7 @@ class HerosEditForm extends Component {
 	    //Important! If your component is navigating based on some global state(from say componentWillReceiveProps)
 	    //always reset that global state back to null when you REMOUNT
 	    //this.props.resetMe();
-      this.props.currentOffers();
+      //this.props.currentOffers();
       this.props.fetchHero();
       
 	 }
@@ -155,6 +163,7 @@ class HerosEditForm extends Component {
                    type="text"
                    component={ renderField }
                    label="Division" />
+                   
 	           <div className="button-container">
                <button
                     type="submit"
@@ -186,7 +195,12 @@ class HerosEditForm extends Component {
                 <p>Rank: {hero.rank}</p>
                 <p>Association: {hero.association}</p>
                 <p>Division: {hero.division}</p>
-                 <CurrentOffers offer={offer} />
+                <CurrentOffers offer={offer} />
+                <DatePicker
+                  onChange={this.onChange}
+                  value={this.state.date}
+                />
+                <hr/>
           </section>
          
           <button onClick={this.toggleEdit}>Edit</button>
