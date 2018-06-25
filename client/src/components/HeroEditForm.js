@@ -6,9 +6,13 @@ import renderField  from './renderField'
 import { Link } from 'react-router-dom'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
-import HerosMenu  from './HerosMenu'
 import CurrentOffers from './CurrentOffers'
-import DatePicker from 'react-date-picker'
+
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 
 //Client side validation
@@ -181,8 +185,8 @@ class HerosEditForm extends Component {
     return (
     
       <div className="hero-full">
-      <HerosMenu heros={heros} />
-        <div className="hero">
+       <FormControl component="fieldset">
+        <FormLabel component="legend">Details</FormLabel>
           <header style={headerStyle} />
           <div className="picture-container">
              <img alt={`${hero.firstname}'s profile`} src={`/styles/images/${hero.image}`} />
@@ -196,16 +200,13 @@ class HerosEditForm extends Component {
                 <p>Association: {hero.association}</p>
                 <p>Division: {hero.division}</p>
                 <CurrentOffers offer={offer} />
-                <DatePicker
-                  onChange={this.onChange}
-                  value={this.state.date}
-                />
                 <hr/>
           </section>
          
           <button onClick={this.toggleEdit}>Edit</button>
           <button onClick={deleteHero}>Delete</button>
-        </div>
+        </FormControl>
+
         <div className="navigateBack">
             <Link to="/">« Back to the index</Link>
           </div>

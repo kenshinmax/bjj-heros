@@ -1,3 +1,7 @@
+// aws library
+import Amplify, { API } from 'aws-amplify';
+import aws_exports from '../aws-exports';
+
 // Fetch heroList
 export const FETCH_HEROS = 'FETCH_HEROS'
 export const FETCH_HEROS_SUCCESS = 'FETCH_HEROS_SUCCESS';
@@ -38,20 +42,17 @@ export const FETCH_OFFER = 'FETCH_OFFER';
 export const FETCH_OFFER_SUCCESS = 'FETCH_OFFER_SUCCESS';
 export const FETCH_OFFER_FAILURE = 'FETCH_OFFER_FAILURE';
 
-import Amplify, { API } from 'aws-amplify';
-import aws_exports from './aws-exports';
+
 
 Amplify.configure(aws_exports);
 
 const url = 'http://localhost:3001'
 
 export function validateHeroFields(props) {
-
   const request = fetch(url + '/items/validate/fields', { 
       method: 'post', 
       body: JSON.stringify(props)
     })
-
   return {
     type: VALIDATE_HERO_FIELDS,
     payload: request
