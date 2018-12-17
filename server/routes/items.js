@@ -139,7 +139,7 @@ router.post('/addHero', function(req, res, next) {
   
   hero.save(function(err, hero) {
     if(err){
-      consol.log(err);
+      console.log(err);
       return res.status(500).json({
       	message: 'Could not save hero'
       })

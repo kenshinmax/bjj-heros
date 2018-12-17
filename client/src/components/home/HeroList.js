@@ -23,7 +23,7 @@ const styles = theme => ({
 
 class HeroList extends Component {
   state = {
-    spacing: '25',
+    spacing: '24',
   };
 
   handleChange = key => (event, value) => {
@@ -36,8 +36,8 @@ class HeroList extends Component {
     this.props.fetchHeros();
   }
 
-  renderHeros(heros) {
-    return heros.map((hero) => {
+  renderHeros(heroes) {
+    return heroes.map((hero) => {
       return (
          <HeroCard key={ hero.id } {...hero} />
       );
@@ -47,7 +47,7 @@ class HeroList extends Component {
   render() {
     const { classes } = this.props;
     const { spacing } = this.state;
-    const { heros, loading, error } = this.props.heroList;
+    const { heroes, loading, error } = this.props.heroList;
 
     if(loading) {
       return <div className="container"><h1>Heros</h1><h3>Loading...</h3></div>      
@@ -57,7 +57,7 @@ class HeroList extends Component {
 
     return (
       <Grid container className={classes.grid} justify="center" spacing={Number(spacing)}>
-          {this.renderHeros(heros)}
+          {this.renderHeros(heroes)}
       
       </Grid>
     );

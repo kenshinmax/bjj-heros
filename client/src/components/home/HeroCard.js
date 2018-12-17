@@ -19,7 +19,9 @@ const styles = theme => ({
     paddingBottom: 10,
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    margin: 10
+    margin: 10,
+    height: 150,
+    width: 180
   },
 });
 
@@ -35,7 +37,7 @@ class HeroCard extends React.Component {
       <Link to={`/hero/${id}`}>
   	   <Grid item xs spacing={Number(spacing)}>
   	     <Paper className={classes.paper}>
-  	     <img src={`styles/images/${image}`} alt={`${fullName(firstname, lastname)}'s profile`} />
+  	     <img style={{width: 180 + 'px', height: 132+ 'px'}} src={`styles/images/${image}`} alt={`${fullName(firstname, lastname)}'s profile`} />
   	     <Typography noWrap>{fullName(firstname, lastname)}</Typography>
   	     </Paper>
   	   </Grid>

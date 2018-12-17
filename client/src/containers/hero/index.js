@@ -6,9 +6,9 @@ import { push } from 'react-router-redux'
    
 function mapStateToProps(state, ownProps) {
   return {
-    heroList: state.items.heroList.heros, 
+    heroList: state.items.heroList.hereos, 
     activeHero: () => (
-      state.items.heroList.heros.find(current => current.id === ownProps.id)
+      state.items.heroList.heroes.find(current => current.id === ownProps.id)
     )
   };
 }

@@ -100,8 +100,7 @@ class HerosEditForm extends Component {
 	    //always reset that global state back to null when you REMOUNT
 	    //this.props.resetMe();
       //this.props.currentOffers();
-      this.props.fetchHero();
-      
+      this.props.fetchHero();   
 	 }
 
 	componentWillReceiveProps(nextProps) {
@@ -123,12 +122,11 @@ class HerosEditForm extends Component {
      }
 	}
 	render() {
-   
 	 const {deleteHero, handleSubmit, pristine, reset, submitting, activeHero, onClick} = this.props;
    const id  = this.props.id
-   const heros   = this.props.heroList
+   const { heroes }   = this.props.heroList
    const offer = this.props.offer
-   const hero = heros.find(current => current.id === id)
+   const hero = heroes.find(current => current.id === id)
    const headerStyle = { backgroundImage: `url(/styles/images/${hero.cover})` };
    
 
@@ -219,7 +217,7 @@ class HerosEditForm extends Component {
 function mapStateToProps(state, ownProps) {
     
     return {
-        initialValues : state.items.heroList.heros.find(current => current.id === ownProps.id),
+        initialValues : state.items.heroList.heroes.find(current => current.id === ownProps.id),
         offer: state.items.offer
      }
 }

@@ -9,6 +9,7 @@ import Home from '../home'
 import About from '../about'
 import Detail from '../hero'
 import CreateHero from '../create'
+import Locations from '../location'
 
 import Amplify, { Analytics } from 'aws-amplify';
 import aws_exports from '../../aws-exports';
@@ -26,7 +27,8 @@ const App = () => (
     <Route exact path="/" component={Home} />
     <Route exact path="/about-us" component={About} />
     <Route path="/hero/:id" component={renderHero} />
-    <Route exact path="/create" component={CreateHero} />  
+    <Route exact path="/create" component={CreateHero} />
+    <Route exact path="/locations" component={Locations} />
   </Layout>
 )
 

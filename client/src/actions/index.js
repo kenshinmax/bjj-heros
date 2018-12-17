@@ -1,25 +1,25 @@
 // aws library
-import Amplify, { API } from 'aws-amplify';
-import aws_exports from '../aws-exports';
+import Amplify, { API } from 'aws-amplify'
+import aws_exports from '../aws-exports'
 
 // Fetch heroList
 export const FETCH_HEROS = 'FETCH_HEROS'
-export const FETCH_HEROS_SUCCESS = 'FETCH_HEROS_SUCCESS';
-export const FETCH_HEROS_FAILURE = 'FETCH_HEROS_FAILURE';
-export const RESET_HEROS = 'RESET_HEROS';
+export const FETCH_HEROS_SUCCESS = 'FETCH_HEROS_SUCCESS'
+export const FETCH_HEROS_FAILURE = 'FETCH_HEROS_FAILURE'
+export const RESET_HEROS = 'RESET_HEROS'
 
 // Fetch hero
-export const FETCH_HERO = 'FETCH_HERO';
-export const FETCH_HERO_SUCCESS = 'FETCH_HERO_SUCCESS';
-export const FETCH_HERO_FAILURE = 'FETCH_HERO_FAILURE';
-export const RESET_ACTIVE_HERO = 'RESET_ACTIVE_HERO';
+export const FETCH_HERO = 'FETCH_HERO'
+export const FETCH_HERO_SUCCESS = 'FETCH_HERO_SUCCESS'
+export const FETCH_HERO_FAILURE = 'FETCH_HERO_FAILURE'
+export const RESET_ACTIVE_HERO = 'RESET_ACTIVE_HERO'
 export const RESET_DELETED_HERO = 'RESET_DELETED_HERO'
 
 //Validate post fields like Title, Categries on the server
-export const VALIDATE_HERO_FIELDS = 'VALIDATE_HERO_FIELDS';
-export const VALIDATE_HERO_FIELDS_SUCCESS = 'VALIDATE_HERO_FIELDS_SUCCESS';
-export const VALIDATE_HERO_FIELDS_FAILURE = 'VALIDATE_HERO_FIELDS_FAILURE';
-export const RESET_HERO_FIELDS = 'RESET_HERO_FIELDS';
+export const VALIDATE_HERO_FIELDS = 'VALIDATE_HERO_FIELDS'
+export const VALIDATE_HERO_FIELDS_SUCCESS = 'VALIDATE_HERO_FIELDS_SUCCESS'
+export const VALIDATE_HERO_FIELDS_FAILURE = 'VALIDATE_HERO_FIELDS_FAILURE'
+export const RESET_HERO_FIELDS = 'RESET_HERO_FIELDS'
 
 // Create Hero
 export const CREATE_HERO = 'CREATE_HERO'
@@ -38,10 +38,19 @@ export const DELETE_HERO_SUCCESS = 'DELETE_HERO_SUCCESS'
 export const DELETE_HERO_FAILURE = 'DELETE_HERO_FAILURE'
 
 // Current offers
-export const FETCH_OFFER = 'FETCH_OFFER';
-export const FETCH_OFFER_SUCCESS = 'FETCH_OFFER_SUCCESS';
-export const FETCH_OFFER_FAILURE = 'FETCH_OFFER_FAILURE';
+export const FETCH_OFFER = 'FETCH_OFFER'
+export const FETCH_OFFER_SUCCESS = 'FETCH_OFFER_SUCCESS'
+export const FETCH_OFFER_FAILURE = 'FETCH_OFFER_FAILURE'
 
+// Locations
+export const FETCH_LOCATION = 'FETCH_LOCATION'
+export const FETCH_LOCATION_SUCCESS = 'FETCH_LOCATION_SUCCESS'
+export const FETCH_LOCATION_FAILURE = 'FETCH_LOCATION_FAILURE'
+
+// Locations
+export const FETCH_LOCATIONS = 'FETCH_LOCATIONS'
+export const FETCH_LOCATIONS_SUCCESS = 'FETCH_LOCATIONS_SUCCESS'
+export const FETCH_LOCATIONS_FAILURE = 'FETCH_LOCATIONS_FAILURE'
 
 
 Amplify.configure(aws_exports);
@@ -72,6 +81,54 @@ export function validateHeroFieldsFailure(error) {
   };
 }
 
+export function requestLocations(request) {
+  return {
+    type: FETCH_LOCATIONS,
+    payload: request
+  }
+}
+
+export function fetchLocationsSuccess(newLocation) {
+  return {
+    type: FETCH_LOCATIONS_SUCCESS,
+    payload: newLocation
+  }
+}
+
+export function fetchLocationsFailure(error) {
+  return {
+    type: FETCH_LOCATIONS_FAILURE,
+    payload: error
+  }
+}
+
+export function fetchLocation(request) {
+  return {
+    type: FETCH_LOCATION,
+    payload: request
+  }
+}
+
+export function fetchLocationSuccess(newLocation) {
+  return {
+    type: FETCH_LOCATION_SUCCESS,
+    payload: newLocation
+  }
+}
+
+export function fetchLocationFailure(error) {
+  return {
+    type: FETCH_LOCATION_FAILURE,
+    payload: error
+  }
+}
+
+export function fetchOffer(request) {
+  return {
+      type: FETCH_OFFER,
+      payload: request
+    }
+}
 
 export function fetchOfferSuccess(newOffer) {
   return {
@@ -125,13 +182,6 @@ export function setHero(request) {
 export function addHero(request) {
   return {
       type: CREATE_HERO,
-      payload: request
-    }
-}
-
-export function fetchOffer(request) {
-  return {
-      type: FETCH_OFFER,
       payload: request
     }
 }
@@ -193,7 +243,14 @@ export function currentOffers(props) {
     .then(json => dispatch(fetchOfferSuccess(json)))
   }
 }
-
+export function fetchLocations() {
+  return dispatch => {
+    dispatch(requestLocations())
+    return fetch(url+'/locations')
+           .then(response => response.json())
+           .then(json => dispatch(fetchLocationsSuccess(json)))
+  }
+}
 export function fetchHeros() {
   return dispatch => {
     dispatch(requestHeros())

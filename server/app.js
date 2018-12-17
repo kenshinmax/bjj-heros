@@ -9,6 +9,8 @@ var morgan = require("morgan");
 var index = require('./routes/index');
 var users = require('./routes/users');
 var items = require('./routes/items');
+var heroes = require('./routes/heroes');
+var locations = require('./routes/locations');
 
 var app = express();
 var cors = require('cors');
@@ -38,8 +40,10 @@ app.use(bodyParser.json({ type: 'application/*+json' }))
 
 
 app.use('/', index);
-app.use('/items', items)
-app.use('/items/*', express.static(path.join(__dirname, 'public')));
+app.use('/items', items);
+app.use('heroes', heroes);
+app.use('/locations', locations);
+//app.use('/items/*', express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -47,8 +51,6 @@ app.use(function(req, res, next) {
 	err.status = 404;
 	next(err);
 });
-
-
 
 // error handler
 app.use(function(err, req, res, next) {

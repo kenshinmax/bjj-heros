@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   heroList: { 
-        heros: [],
+        heroes: [],
         error: null,
         loading: false,
         submitting: false
@@ -21,13 +21,13 @@ export default function (state = initialState, action) {
   let error;
   switch (action.type) {
     case FETCH_HEROS: // start fetching heros and set loading = true 
-      return { ...state, heroList: { heros: [], error: null, loading: true } }
+      return { ...state, heroList: { heroes: [], error: null, loading: true } }
     case FETCH_HEROS_SUCCESS: // return list of posts and make loading false
-      return { ...state, heroList: { heros: action.payload , error: null, loading: false } }
+      return { ...state, heroList: { heroes: action.payload , error: null, loading: false } }
     case FETCH_HEROS_FAILURE: // return an error and make loading = false
-      return { ...state, heroList: { heros: [], error: true, loading: false } }
+      return { ...state, heroList: { heroes: [], error: true, loading: false } }
     case RESET_HEROS: // reset the heroList to the initial state
-      return { ...state, heroList: { heros: initialState, error: null, loading: false} }
+      return { ...state, heroList: { heroes: initialState, error: null, loading: false} }
 
     case FETCH_HERO: // start fetching heros and set loading = true 
       return { ...state, activeHero: { hero: null, error: null, loading: true } }

@@ -5,7 +5,7 @@ import HeroEditForm from '../../components/HeroEditForm'
 
 function mapStateToProps (state, ownProps) {
   return {
-    heroList: ownProps.heroList,
+    heroList: state.items.heroList,
     id: ownProps.id,
     rank: ownProps.activeHero.rank
   }

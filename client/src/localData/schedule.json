@@ -1,0 +1,20 @@
+[
+	{
+		"name": "BJJ",
+		"description": "Brazilian Jiu Jitsu",
+		"classes": [
+            { 
+            	"name": "Kids 3-4 Brazilian",
+            	"time": "4:00PM - 4:45PM"
+            },
+            { 
+            	"name": "Kids 5-6 Brazilian",
+            	"time": "4:45PM - 5:30PM"
+            },
+            { 
+            	"name": "Kids 7-11 Brazilian",
+            	"time": "5:30PM - 6:15PM"
+            }
+		]
+	}
+]
