@@ -13,7 +13,7 @@
     "es6-promise": "^4.2.4",
     "history": "^4.7.2",
     "material-ui-image": "^3.0.0",
-    "mongoose": "^5.1.6",
+    "mongoose": "^5.7.5",
     "mongoose-timestamp": "^0.6.0",
     "morgan": "^1.9.0",
     "prop-types": "^15.6.2",
